@@ -1,0 +1,23 @@
+
+:host {
+  display: block;
+  box-sizing: border-box;
+  .button-inner {
+    background-color: lightblue;
+  }
+
+  ::slotted(*) {
+    background-color: lightcoral;
+  }
+}
+
+:host(.disabled) {
+    pointer-events: none;
+    cursor: default;
+  // * {
+  //   pointer-events: none;
+  // }
+  // ::slotted(*) {
+  //   pointer-events: none;
+  // }
+}

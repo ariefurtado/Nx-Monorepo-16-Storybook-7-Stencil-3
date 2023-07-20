@@ -4,10 +4,12 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn start:storybook",
-    "start:storybook": "nx run web-components:storybook",
-    "build:web-components": "nx run web-components:build",
-    "test:spec": "nx run web-components:test",
-    "test:interactions": "cd packages/web-components && test-storybook"
+    "start:storybook": "npx nx run web-components:storybook",
+    "build:web-components": "npx nx run web-components:build",
+    "watch:web-components": "npx nx run web-components:build --watch",
+    "test:spec": "npx nx run web-components:test",
+    "test:interactions": "test-storybook --url http://localhost:4400 --config-dir ./packages/web-components/.storybook --verbose",
+    "generate": "stw create --path=./packages/web-components/src/components"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +31,7 @@
     "@stencil/core": "^3.4.0",
     "@stencil/react-output-target": "^0.4.0",
     "@stencil/sass": "3.0.0",
+    "@storybook/addon-coverage": "^0.0.8",
     "@storybook/addon-docs": "7.0.24",
     "@storybook/addon-essentials": "7.0.24",
     "@storybook/addon-interactions": "7.0.24",
@@ -60,6 +63,7 @@
     "nx": "16.5.2",
     "prettier": "^2.6.2",
     "puppeteer": "^15.5.0",
+    "stencil-wizard": "^1.0.9",
     "ts-jest": "^27.1.4",
     "ts-node": "10.9.1",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
