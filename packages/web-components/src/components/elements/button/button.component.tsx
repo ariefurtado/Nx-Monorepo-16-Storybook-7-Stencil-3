@@ -33,7 +33,6 @@ export class MyButton {
   @Event() trpBtnReseted: EventEmitter<boolean>;
 
   handleClick(e: MouseEvent) {
-    console.log('o click do botão')
     if (this.type === 'submit') {
       this.trpBtnSubmited.emit(true);
 
@@ -58,7 +57,6 @@ export class MyButton {
   }
 
   render() {
-    console.log('>> this.disabled', this.disabled);
     const { type, target, href, disabled, isClear, layout, color, iconUrl } =
       this;
     const TagType = href === undefined ? 'button' : ('a' as any);
