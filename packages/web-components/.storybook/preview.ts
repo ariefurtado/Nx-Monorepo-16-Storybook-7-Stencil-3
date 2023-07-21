@@ -7,9 +7,20 @@
 // };
 
 export const argTypes = {
-    tagname: {
-        table: {
-            disable: true
-        }
-    }
+  tagname: {
+    table: {
+      disable: true,
+    },
+  },
+  ['data-testid']: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export const parameters = {
+  backgrounds: {
+    default: 'dark',
+  },
 };

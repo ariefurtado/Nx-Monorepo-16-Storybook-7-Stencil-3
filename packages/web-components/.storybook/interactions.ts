@@ -21,13 +21,16 @@ export async function withinShadowRoot(
 
 export async function expectToBeRendered(
   canvasElement: HTMLElement,
-  tagname: string
+  tagname: string,
+  step: any
 ) {
-  const canvas = within(canvasElement);
-  const el = await canvas.findByTestId(tagname);
-
-  // Wait for web-component to be visible/hydra ted
-  await waitFor(() => expect(el).toBeVisible());
+  await step(`${tagname} should render`, async () => {
+    const canvas = within(canvasElement);
+    const el = await canvas.findByTestId(tagname);
+  
+    // Wait for web-component to be visible/hydra ted
+    await waitFor(() => expect(el).toBeVisible());
+  })
 }
 
 export async function customPlay(
@@ -35,7 +38,7 @@ export async function customPlay(
   cb: (ctx: StoryContext) => Promise<void>,
   before?: () => Promise<void>,
   after?: (data?: any) => Promise<void>
-) {
+  ) {
   await before?.();
   await cb(ctx);
   await after?.();
