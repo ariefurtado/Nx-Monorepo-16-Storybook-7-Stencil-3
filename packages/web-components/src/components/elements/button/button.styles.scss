@@ -2,12 +2,23 @@
 :host {
   display: block;
   box-sizing: border-box;
-  .button-inner {
-    background-color: lightblue;
+  button {
+    outline: 0;
+    border: none;
   }
-
+  button, a {
+    display: inline-block;
+    background-color: purple;
+    width: 200px;
+    padding: .625rem 2rem;
+    border-radius: 1rem;
+  }
   ::slotted(*) {
-    background-color: lightcoral;
+    font-size: 1rem;
+    color: white;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
   }
 }
 

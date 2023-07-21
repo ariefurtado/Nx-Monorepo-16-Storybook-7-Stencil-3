@@ -17,6 +17,24 @@ export async function myButtonDefaultTests({
   canvasElement,
   step,
 }: StoryContext) {
+  await step('should have a purple background color', async () => {
+    // Arrange
+    const myButtonShadow = await withinShadowRoot(canvasElement, tagname);
+    const button: HTMLButtonElement = await myButtonShadow.findByRole('button');
+    setTimeout(() => {
+      console.log('>> button.background', button.style.backgroundColor);
+      console.log('>> button.background', button.style);
+      
+    }, 1000);
+
+    
+    //Act
+    
+    // Assert
+    await waitFor(() => expect(button.style.backgroundColor).toBe('purple'));
+
+  });
+
   await step('should call the onClick handler', async () => {
     // Arrange
     const handleClick = jest.fn();
