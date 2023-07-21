@@ -14,10 +14,4 @@
 :host(.disabled) {
     pointer-events: none;
     cursor: default;
-  // * {
-  //   pointer-events: none;
-  // }
-  // ::slotted(*) {
-  //   pointer-events: none;
-  // }
 }

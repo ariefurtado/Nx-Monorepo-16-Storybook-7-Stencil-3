@@ -30,11 +30,10 @@ export class MyButton {
   @Prop() iconUrl: string;
 
   @Event() trpBtnSubmited: EventEmitter<boolean>;
-
   @Event() trpBtnReseted: EventEmitter<boolean>;
 
   handleClick(e: MouseEvent) {
-    console.log('handle click', e)
+    console.log('o click do botão')
     if (this.type === 'submit') {
       this.trpBtnSubmited.emit(true);
 
@@ -59,6 +58,7 @@ export class MyButton {
   }
 
   render() {
+    console.log('>> this.disabled', this.disabled);
     const { type, target, href, disabled, isClear, layout, color, iconUrl } =
       this;
     const TagType = href === undefined ? 'button' : ('a' as any);
@@ -72,7 +72,6 @@ export class MyButton {
 
     return (
       <Host
-        onClick={(e) => console.log('click no host', e)}
         aria-disabled={disabled ? 'true' : null}
         class={{
           [type]: true,

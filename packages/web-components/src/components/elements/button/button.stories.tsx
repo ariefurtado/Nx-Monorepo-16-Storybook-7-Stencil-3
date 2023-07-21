@@ -1,37 +1,51 @@
-import { Meta, StoryContext, StoryFn, StoryObj } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { MyButton } from '@monorepo/web-components-react';
-import { customPlay } from "packages/web-components/.storybook/interactions";
-import { myButtonTests } from "./button.spec";
+import { customPlay } from 'packages/web-components/.storybook/interactions';
+import { myButtonBaseTests, myButtonDefaultTests, myButtonDisabledTests } from './button.spec';
 
 
-export default {
-  title: 'Elements/Button',
+const meta: Meta<typeof MyButton> = {
   component: MyButton,
   args: {
-    tagname: 'my-button',
+    disabled: false,
+    ['data-testid']: 'my-button'
   },
-} as Meta;
+  play: async (ctx) => await customPlay(ctx, myButtonBaseTests)
+};
+export default meta;
 
-const ContentText = () => <p>Take me to the server!</p>;
+const GenericTemplate: StoryFn = (args) => {
+  return (
+    <MyButton {...args}>
+      <p>Take me to the server!</p>
+    </MyButton>
+  );
+};
 
-const GenericTemplate: StoryFn = ({ Content, ...args }) => (
-  <MyButton {...args}>
-    <Content />
-  </MyButton>
-);
+export const Default: StoryObj = {
+  render: GenericTemplate,
+  play: async (ctx) => {
+    await meta.play(ctx)  
+    await customPlay(ctx, myButtonDefaultTests)
+  }
+};
 
-export const Button: StoryObj = {
-  render: GenericTemplate.bind({}),
-  play: async (ctx: StoryContext) =>
-  await customPlay(
-    ctx,
-    myButtonTests,
-    async () => console.log('i am before'),
-    async (data = 'bla bla bla') => console.log('i am after', data)
-  ),
-}
-Button.args = {
-  Content: ContentText,
-  disabled: false,
-  ['data-testid']: 'my-button'
+export const CTA: StoryObj = {
+  render: GenericTemplate,
+  play: async (ctx) => {
+    await meta.play(ctx);
+    await customPlay(ctx, myButtonBaseTests)
+  },
+};
+
+export const Disabled: StoryObj = {
+  render: GenericTemplate,
+  args: {
+    ...meta.args,
+    disabled: true,
+  },
+  play: async (ctx) => { 
+    await meta.play(ctx);
+    await customPlay(ctx, myButtonDisabledTests)
+  }
 };
