@@ -10,7 +10,7 @@ import {
 } from '@stencil/core';
 
 // Utils
-import { ButtonColor, ButtonLayout, ButtonTypes } from './button.model';
+import { ButtonLayout, ButtonTypes } from './button.model';
 
 @Component({
   tag: 'my-button',
@@ -21,10 +21,9 @@ export class MyButton {
   @Element() el!: HTMLElement;
 
   @Prop() type: ButtonTypes = ButtonTypes.BUTTON;
-  @Prop() color: ButtonColor;
   @Prop({ reflect: true }) disabled: boolean = false;
   @Prop({ reflect: true }) isClear: boolean = false;
-  @Prop() layout: ButtonLayout = ButtonLayout.CTA;
+  @Prop() layout: ButtonLayout = ButtonLayout.DEFAULT;
   @Prop() href: string;
   @Prop() target: string;
   @Prop() iconUrl: string;
@@ -57,8 +56,7 @@ export class MyButton {
   }
 
   render() {
-    const { type, target, href, disabled, isClear, layout, color, iconUrl } =
-      this;
+    const { type, target, href, disabled, isClear, layout } = this;
     const TagType = href === undefined ? 'button' : ('a' as any);
     const attrs =
       TagType === 'button'
@@ -76,17 +74,15 @@ export class MyButton {
           disabled: disabled,
           isClear: isClear,
           [layout]: true,
-          [color]: true,
         }}
       >
-        <TagType 
-          {...attrs} 
+        <TagType
+          {...attrs}
           disabled={disabled}
           onClick={(e: MouseEvent) => this.handleClick(e)}
-          >
+        >
           <span class="button-inner">
             <slot></slot>
-            {layout === ButtonLayout.ICON && <trp-icon url={iconUrl} />}
           </span>
         </TagType>
       </Host>

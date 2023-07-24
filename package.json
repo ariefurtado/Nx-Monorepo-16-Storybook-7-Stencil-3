@@ -5,6 +5,7 @@
   "scripts": {
     "start": "yarn start:storybook",
     "start:storybook": "npx nx run web-components:storybook",
+    "build:storybook": "npx nx run web-components:build-storybook",
     "build:web-components": "npx nx run web-components:build",
     "watch:web-components": "npx nx run web-components:build --watch",
     "test:spec": "npx nx run web-components:test",

@@ -1,10 +1,13 @@
-import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { MyButton } from '@monorepo/web-components-react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { ButtonLayout, MyButtonModel } from './button.model';
 import { customPlay } from 'packages/web-components/.storybook/interactions';
-import { myButtonBaseTests, myButtonDefaultTests, myButtonDisabledTests } from './button.spec';
+import { myButtonBaseTests, myButtonDisabledTests } from './button.spec';
+
 
 
 const meta: Meta<typeof MyButton> = {
+  title: 'Elements/Button',
   component: MyButton,
   args: {
     disabled: false,
@@ -16,22 +19,26 @@ export default meta;
 
 const GenericTemplate: StoryFn = (args) => {
   return (
-    <MyButton {...args}>
+    <MyButton {...args} >
       <p>Take me to the server!</p>
     </MyButton>
   );
 };
 
-export const Default: StoryObj = {
+export const Default: StoryObj<MyButtonModel> = {
   render: GenericTemplate,
   play: async (ctx) => {
     await meta.play(ctx)  
-    await customPlay(ctx, myButtonDefaultTests)
+    await customPlay(ctx, myButtonBaseTests)
   }
 };
 
 export const CTA: StoryObj = {
   render: GenericTemplate,
+  args: {
+    ...meta.args,
+    layout: ButtonLayout.CTA
+  },
   play: async (ctx) => {
     await meta.play(ctx);
     await customPlay(ctx, myButtonBaseTests)

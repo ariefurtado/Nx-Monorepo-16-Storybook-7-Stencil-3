@@ -8,11 +8,19 @@
   }
   button, a {
     display: inline-block;
-    background-color: purple;
+    background-color: #800080;
     width: 200px;
     padding: .625rem 2rem;
     border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out;
   }
+
+  button:hover,
+  a:hover {
+    background-color: #0a034b;
+  }
+
   ::slotted(*) {
     font-size: 1rem;
     color: white;

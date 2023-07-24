@@ -22,6 +22,7 @@
   "include": [
     "../**/*.spec.tsx",
     "../**/*.spec.ts",
+    "../**/*.ts",
     "../src/**/*.stories.ts",
     "../src/**/*.stories.js",
     "../src/**/*.stories.jsx",

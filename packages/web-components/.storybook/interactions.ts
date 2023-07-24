@@ -1,6 +1,11 @@
 import { waitFor, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import { StoryContext } from '@storybook/react';
+import type { PlayFunctionContext } from '@storybook/types';
+import { ReactRenderer } from '@storybook/react';
+
+interface Args {
+  [name: string]: any;
+}
 
 export async function withinShadowRoot(
   canvasElement: HTMLElement,
@@ -24,21 +29,21 @@ export async function expectToBeRendered(
   tagname: string,
   step: any
 ) {
-  await step(`${tagname} should render`, async () => {
+  await step(`should render`, async () => {
     const canvas = within(canvasElement);
     const el = await canvas.findByTestId(tagname);
-  
-    // Wait for web-component to be visible/hydra ted
+
+    // Wait for web-component to be visible/hydrated
     await waitFor(() => expect(el).toBeVisible());
-  })
+  });
 }
 
-export async function customPlay(
-  ctx: StoryContext,
-  cb: (ctx: StoryContext) => Promise<void>,
+export async function customPlay<T = Args>(
+  ctx: PlayFunctionContext<ReactRenderer, T>,
+  cb: (ctx: PlayFunctionContext<ReactRenderer, T>) => Promise<void>,
   before?: () => Promise<void>,
   after?: (data?: any) => Promise<void>
-  ) {
+) {
   await before?.();
   await cb(ctx);
   await after?.();

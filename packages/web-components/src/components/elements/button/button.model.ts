@@ -6,18 +6,10 @@ export enum ButtonTypes {
   
   export enum ButtonLayout {
     CTA = 'cta',
-    NEWSLETTER = 'newsletter',
-    ICON = 'icon',
-    ARTIST_PAGE_CTA = 'artist-page-cta',
+    DEFAULT = 'newsletter',
   }
-  
-  export enum ButtonColor {
-    GRADIENT = 'gradient',
-    WHITE = 'white',
-    OUTLINED = 'outlined',
-  }
-  
-  export interface TrpButtonModel {
+    
+  export interface MyButtonModel {
     type: ButtonTypes;
     disabled: boolean;
     isClear: boolean;
@@ -25,6 +17,5 @@ export enum ButtonTypes {
     target: string;
     icon: string;
     layout: ButtonLayout;
-    color: ButtonColor;
   }
   
