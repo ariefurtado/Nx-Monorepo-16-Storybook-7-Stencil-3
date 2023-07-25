@@ -6,7 +6,7 @@ export enum ButtonTypes {
   
   export enum ButtonLayout {
     CTA = 'cta',
-    DEFAULT = 'newsletter',
+    DEFAULT = 'default',
   }
     
   export interface MyButtonModel {

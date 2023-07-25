@@ -23,4 +23,5 @@ export const parameters = {
   backgrounds: {
     default: 'dark',
   },
+  actions: { argTypesRegex: '^on.*' },
 };

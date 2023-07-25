@@ -26,32 +26,35 @@ export class MyButton {
   @Prop() layout: ButtonLayout = ButtonLayout.DEFAULT;
   @Prop() href: string;
   @Prop() target: string;
-  @Prop() iconUrl: string;
 
-  @Event() trpBtnSubmited: EventEmitter<boolean>;
-  @Event() trpBtnReseted: EventEmitter<boolean>;
+  @Event() myBtnSubmited: EventEmitter<boolean>;
+  @Event() myBtnReseted: EventEmitter<boolean>;
 
   handleClick(e: MouseEvent) {
+    console.log('handle click');
     if (this.type === 'submit') {
-      this.trpBtnSubmited.emit(true);
-
-      e.preventDefault();
-      const form = this.el.closest('form');
-
-      if (form) {
-        e.preventDefault();
-
-        const fakeButton = document.createElement('button');
-        fakeButton.type = this.type;
-        fakeButton.style.display = 'none';
-        form.appendChild(fakeButton);
-        fakeButton.click();
-        fakeButton.remove();
-      }
+      this.myBtnSubmited.emit(true);
+      this.fakeNativeButtonClick(e);
     }
 
     if (this.type === 'reset') {
-      this.trpBtnReseted.emit();
+      this.myBtnReseted.emit(true);
+      this.fakeNativeButtonClick(e);
+    }
+  }
+
+  private fakeNativeButtonClick(e: MouseEvent) {
+    const form = this.el.closest('form');
+
+    if (form) {
+      e.preventDefault();
+
+      const fakeButton = document.createElement('button');
+      fakeButton.type = this.type;
+      fakeButton.style.display = 'none';
+      form.appendChild(fakeButton);
+      fakeButton.click();
+      fakeButton.remove();
     }
   }
 

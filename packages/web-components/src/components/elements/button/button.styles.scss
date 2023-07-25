@@ -1,36 +1,71 @@
-
 :host {
   display: block;
   box-sizing: border-box;
-  button {
+
+  button,
+  a {
+    box-sizing: border-box;
     outline: 0;
     border: none;
-  }
-  button, a {
     display: inline-block;
-    background-color: #800080;
-    width: 200px;
-    padding: .625rem 2rem;
+    width: 280px;
+    padding: 0.625rem 2rem;
     border-radius: 1rem;
     cursor: pointer;
     transition: background-color 300ms ease-in-out;
   }
 
-  button:hover,
-  a:hover {
-    background-color: #0a034b;
+  a {
+    text-decoration: none;
   }
 
   ::slotted(*) {
+    text-align: center;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    cursor: inherit;
     font-size: 1rem;
-    color: white;
+    color: rgb(255, 255, 255);
     font-weight: bold;
     padding: 0;
     margin: 0;
   }
 }
 
+:host(.default) {
+  button,
+  a {
+    background-color: rgb(128, 0, 128);
+    border-radius: 1rem;
+  }
+
+  button:hover,
+  a:hover {
+    background-color: rgb(10, 3, 75);
+  }
+}
+
+:host(.cta) {
+  button,
+  a {
+    background-color: rgb(202, 29, 29);
+    border-radius: 1rem 0 1rem 0;
+  }
+
+  button:hover,
+  a:hover {
+    background-color: rgb(175, 3, 209);
+  }
+}
+
 :host(.disabled) {
-    pointer-events: none;
-    cursor: default;
+  pointer-events: none;
+  button,
+  a {
+    background-color: rgb(138, 138, 138);
+  }
+
+  ::slotted(*) {
+    color: rgb(246, 246, 246);
+  }
 }
