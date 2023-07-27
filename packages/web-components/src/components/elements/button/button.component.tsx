@@ -31,7 +31,6 @@ export class MyButton {
   @Event() myBtnReseted: EventEmitter<boolean>;
 
   handleClick(e: MouseEvent) {
-    console.log('handle click');
     if (this.type === 'submit') {
       this.myBtnSubmited.emit(true);
       this.fakeNativeButtonClick(e);
@@ -60,7 +59,7 @@ export class MyButton {
 
   render() {
     const { type, target, href, disabled, isClear, layout } = this;
-    const TagType = href === undefined ? 'button' : ('a' as any);
+    const TagType = href === undefined ? 'button' : 'a';
     const attrs =
       TagType === 'button'
         ? { type }
