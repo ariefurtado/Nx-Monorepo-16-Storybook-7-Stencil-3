@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@monorepo/web-components": ["dist/libs/web-components"],
+      "@monorepo/web-components": ["dist/packages/web-components"],
       "@monorepo/web-components-react": [
         "packages/web-components-react/src/index.ts"
       ],

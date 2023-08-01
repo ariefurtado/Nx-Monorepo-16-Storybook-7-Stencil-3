@@ -42,3 +42,6 @@ packages/web-components-react/**/generated
 
 # Next.js
 .next
+/test-results/
+/playwright-report/
+/playwright/.cache/

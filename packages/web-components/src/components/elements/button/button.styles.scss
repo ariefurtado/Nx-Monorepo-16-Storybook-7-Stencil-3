@@ -40,7 +40,8 @@
   }
 
   button:hover,
-  a:hover {
+  a:hover,
+  .active {
     background-color: rgb(10, 3, 75);
   }
 }
@@ -53,7 +54,8 @@
   }
 
   button:hover,
-  a:hover {
+  a:hover,
+  .active {
     background-color: rgb(175, 3, 209);
   }
 }

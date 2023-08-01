@@ -26,6 +26,7 @@ export class MyButton {
   @Prop() layout: ButtonLayout = ButtonLayout.DEFAULT;
   @Prop() href: string;
   @Prop() target: string;
+  @Prop() active: boolean = false
 
   @Event() myBtnSubmited: EventEmitter<boolean>;
   @Event() myBtnReseted: EventEmitter<boolean>;
@@ -58,7 +59,7 @@ export class MyButton {
   }
 
   render() {
-    const { type, target, href, disabled, isClear, layout } = this;
+    const { type, target, href, disabled, isClear, layout, active } = this;
     const TagType = href === undefined ? 'button' : 'a';
     const attrs =
       TagType === 'button'
@@ -80,6 +81,7 @@ export class MyButton {
       >
         <TagType
           {...attrs}
+          class={{active: active}}
           disabled={disabled}
           onClick={(e: MouseEvent) => this.handleClick(e)}
         >

@@ -1,18 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import { MyButton } from '@monorepo/web-components-react';
-import s from './home.styles.module.scss';
 import { useEffect, useState } from 'react';
-import { getPokemonData } from '../utils/get-pokemon-data';
-import { getPokemonTypes } from '../utils/get-pokemon-types';
-import { getPokemonDataByType } from '../utils/get-pokemon-data-by-type';
+import { MyButton } from '@monorepo/web-components-react';
+import { getPokemonData } from '../services/get-pokemon-data';
+import { getPokemonDataByType } from '../services/get-pokemon-data-by-type';
+import { getPokemonTypes } from '../services/get-pokemon-types';
+import { Pokemon } from '../types/pokemon';
+import s from './home.styles.module.scss';
 
-type PokemonList = { name: string; id: number }[];
-type PokemonTypeList = { id: number; name: string }[];
 export function Index() {
-  const [pokemonData, setPokemonData] = useState<PokemonList>([]);
-  const [pokemonTypes, setPokemonTypes] = useState<PokemonTypeList>([]);
+  const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
+  const [pokemonTypes, setPokemonTypes] = useState<Pokemon[]>([]);
   const [typeFilter, setTypeFilter] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     (async () => {
@@ -29,14 +29,25 @@ export function Index() {
     })();
   }, []);
 
-  const handleFilterClick = async (name: string) => {
-    setIsLoading(true);
-    if (name === typeFilter) return setTypeFilter('');
-    setTypeFilter(name);
 
+
+  const handleFilterClick = async (name: string) => {
+    if (name === typeFilter) {
+      const pokemonData = await getPokemonData();
+      if (pokemonData) {
+        setTypeFilter('')
+        setPokemonData(pokemonData);
+        return
+      }
+
+    };
+
+    setIsLoading(true);
+    
     const filteredPokemons = await getPokemonDataByType(name);
     if (filteredPokemons) {
       setPokemonData(filteredPokemons);
+      setTypeFilter(name);
       setIsLoading(false);
     }
   };
@@ -48,7 +59,7 @@ export function Index() {
         <ul className={s.nav}>
           {pokemonTypes.map((type) => (
             <li key={type.id}>
-              <MyButton onClick={() => handleFilterClick(type.name)}>
+              <MyButton onClick={() => handleFilterClick(type.name)} active={typeFilter === type.name}>
                 <p>{type.name}</p>
               </MyButton>
             </li>

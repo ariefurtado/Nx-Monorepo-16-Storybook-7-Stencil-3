@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npx nx run next-app:serve",
+    "build": "npx nx build",
     "start:storybook": "npx nx run web-components:storybook",
     "build:storybook": "npx nx run web-components:build-storybook",
     "build:web-components": "npx nx run web-components:build",
